@@ -22,6 +22,13 @@ RUN apt-get -q update \
         rsync \
         default-mysql-client \
         sudo \
+        procps \
+        vim \
+        pv \
+        tree \
+        net-tools \
+        htop \
+        make \
         && rm -rf /var/lib/apt/lists/* \
         && rm -rf /var/cache/*
 RUN echo "Container tools built on $(date --iso-8601=seconds)" > /image-build-date.txt
