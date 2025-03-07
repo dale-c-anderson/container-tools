@@ -1,2 +1,2 @@
 # container-tools
-Docker image for doing devopys things from either a docker or kubernetes container
+Docker image for doing devopsy things from either a docker or kubernetes container
