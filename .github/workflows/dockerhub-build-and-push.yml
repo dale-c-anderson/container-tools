@@ -42,11 +42,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
+      - name: Extract metadata (tags, labels) for DockerHub
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
           images: dandersonacro/container-tools
+
+      - name: Extract metadata for GHCR
+        id: meta_ghcr
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+          images: ghcr.io/dandersonacro/container-tools
 
       - name: Build and push (Dockerhub)
         id: push
@@ -65,8 +71,8 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/dandersonacro/container-tools:latest
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.meta_ghcr.outputs.tags }}
+          labels: ${{ steps.meta_ghcr.outputs.labels }}
 
       - name: Generate artifact attestation (Dockerhub)
         uses: actions/attest-build-provenance@v2
