@@ -5,9 +5,9 @@ ENV LANG=C.UTF-8
 ENV LC_ALL=C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get -q update \
-    && apt-get install --no-install-recommends -y apt-utils \
-    && apt-get install --no-install-recommends -y apt-transport-https \
-    && apt-get install --no-install-recommends -y \
+    && apt-get install --no-install-recommends -yq apt-utils \
+    && apt-get install --no-install-recommends -yq apt-transport-https \
+    && apt-get install --no-install-recommends -yq \
         curl \
         ca-certificates \
         wget \
