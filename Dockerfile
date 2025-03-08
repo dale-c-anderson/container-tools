@@ -29,7 +29,10 @@ RUN apt-get -q update \
         net-tools \
         htop \
         make \
+        less \
         && rm -rf /var/lib/apt/lists/* \
         && rm -rf /var/cache/*
-RUN echo "Container tools built on $(date --iso-8601=seconds)" > /image-build-date.txt
+RUN echo "Container tools built on $(date --iso-8601=seconds)" > /image-build-date.txt \
+    && echo "alias ll='ls -alF'" >> /etc/profile.d/00-aliases.sh \
+    && echo "alias ll='ls -alF'" >> /root/.bashrc
 CMD [ "cat", "/image-build-date.txt" ]
