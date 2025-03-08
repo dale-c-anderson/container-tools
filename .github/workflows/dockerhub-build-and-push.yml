@@ -52,7 +52,7 @@ jobs:
         id: meta_ghcr
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: ghcr.io/$GITHUB_REPOSITORY
+          images: ghcr.io/${{ github.repository }}
 
 #      - name: Build and push (Dockerhub)
 #        id: push
@@ -84,6 +84,6 @@ jobs:
       - name: Generate artifact attestation (GHCR)
         uses: actions/attest-build-provenance@v2
         with:
-          subject-name: ghcr.io/$GITHUB_REPOSITORY
+          subject-name: ghcr.io/${{ github.repository }}
           subject-digest: ${{ steps.push_ghcr.outputs.digest }}
           push-to-registry: true
