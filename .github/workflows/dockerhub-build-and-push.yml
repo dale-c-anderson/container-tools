@@ -48,7 +48,7 @@ jobs:
         with:
           images: dandersonacro/container-tools
 
-      - name: Build and push Docker image
+      - name: Build and push (Dockerhub)
         id: push
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
@@ -58,9 +58,26 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Generate artifact attestation
+      - name: Build and push (GHCR)
+        id: push_ghcr
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ghcr.io/dandersonacro/container-tools:latest
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Generate artifact attestation (Dockerhub)
         uses: actions/attest-build-provenance@v2
         with:
           subject-name: index.docker.io/dandersonacro/container-tools
           subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true
+
+      - name: Generate artifact attestation (GHCR)
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: ghcr.io/dandersonacro/container-tools
+          subject-digest: ${{ steps.push_ghcr.outputs.digest }}
           push-to-registry: true
