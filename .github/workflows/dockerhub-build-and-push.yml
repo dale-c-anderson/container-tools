@@ -52,7 +52,7 @@ jobs:
         id: meta_ghcr
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: ghcr.io/dandersonacro/container-tools
+          images: ghcr.io/dale-c-anderson/container-tools
 
       - name: Build and push (Dockerhub)
         id: push
@@ -84,6 +84,6 @@ jobs:
       - name: Generate artifact attestation (GHCR)
         uses: actions/attest-build-provenance@v2
         with:
-          subject-name: ghcr.io/dandersonacro/container-tools
+          subject-name: ghcr.io/dale-c-anderson/container-tools
           subject-digest: ${{ steps.push_ghcr.outputs.digest }}
           push-to-registry: true
