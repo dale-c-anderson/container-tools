@@ -30,6 +30,7 @@ RUN apt-get -q update \
         htop \
         make \
         less \
+        bind9-dnsutils \
         && rm -rf /var/lib/apt/lists/* \
         && rm -rf /var/cache/*
 RUN echo "Container tools built on $(date --iso-8601=seconds)" > /image-build-date.txt \
