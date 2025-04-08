@@ -33,7 +33,11 @@ RUN apt-get -q update \
         bind9-dnsutils \
         && rm -rf /var/lib/apt/lists/* \
         && rm -rf /var/cache/*
+RUN echo "alias ll='ls -alF'" >> /root/.bashrc \
+    && useradd -m appuser \
+    && mkdir -p -v -m775 /home/appuser/.ssh \
+    && chown -R appuser:appuser /home/appuser/.ssh \
+    && echo "alias ll='ls -alF'" >> /home/appuser/.bashrc \
+    && echo "umask 002" >> /home/appuser/.bashrc
 RUN echo "Container tools built on $(date --iso-8601=seconds)" > /image-build-date.txt \
-    && echo "alias ll='ls -alF'" >> /etc/profile.d/00-aliases.sh \
-    && echo "alias ll='ls -alF'" >> /root/.bashrc
 CMD [ "cat", "/image-build-date.txt" ]
