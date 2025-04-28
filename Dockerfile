@@ -31,6 +31,8 @@ RUN apt-get -q update \
         make \
         less \
         bind9-dnsutils \
+        netcat-openbsd \
+        file \
         && rm -rf /var/lib/apt/lists/* \
         && rm -rf /var/cache/*
 RUN echo "alias ll='ls -alF'" >> /root/.bashrc \
