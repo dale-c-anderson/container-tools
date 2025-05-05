@@ -12,7 +12,7 @@ name: Docker Build And Push To Container Registry
 on:
   push:
     tags:
-      - '**'
+      - 'v*.*.*'
   release:
     types: [published]
 
@@ -71,7 +71,9 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ steps.meta_ghcr.outputs.tags }}
+          tags: |
+            ${{ steps.meta_ghcr.outputs.tags }}
+            ${{ github.respository }}:latest
           labels: ${{ steps.meta_ghcr.outputs.labels }}
 
 #      - name: Generate artifact attestation (Dockerhub)
