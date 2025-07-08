@@ -33,6 +33,7 @@ RUN apt-get -q update \
         bind9-dnsutils \
         netcat-openbsd \
         file \
+        swaks \
         && rm -rf /var/lib/apt/lists/* \
         && rm -rf /var/cache/*
 RUN echo "alias ll='ls -alF'" >> /root/.bashrc \
