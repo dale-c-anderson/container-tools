@@ -34,6 +34,7 @@ RUN apt-get -q update \
         netcat-openbsd \
         file \
         swaks \
+        python3-minimal \
         python3-pip \
         && rm -rf /var/lib/apt/lists/* \
         && rm -rf /var/cache/*
