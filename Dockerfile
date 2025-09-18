@@ -43,6 +43,8 @@ RUN echo "alias ll='ls -alF'" >> /root/.bashrc \
     && mkdir -p -v -m775 /home/appuser/.ssh \
     && chown -R appuser:appuser /home/appuser/.ssh \
     && echo "alias ll='ls -alF'" >> /etc/bash.bashrc \
-    && echo "umask 002" >> /etc/bash.bashrc \
-RUN echo "Container tools built on $(date --iso-8601=seconds)" > /image-build-date.txt \
+    && echo "umask 002" >> /etc/bash.bashrc
+RUN curl -sSL https://sdk.cloud.google.com | bash -s -- --install-dir=/opt
+ENV PATH="${PATH}:/opt/google-cloud-sdk/bin"
+RUN echo "Container tools built on $(date --iso-8601=seconds)" > /image-build-date.txt
 CMD [ "cat", "/image-build-date.txt" ]
