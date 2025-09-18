@@ -41,7 +41,7 @@ RUN echo "alias ll='ls -alF'" >> /root/.bashrc \
     && useradd -m appuser \
     && mkdir -p -v -m775 /home/appuser/.ssh \
     && chown -R appuser:appuser /home/appuser/.ssh \
-    && echo "alias ll='ls -alF'" >> /home/appuser/.bashrc \
-    && echo "umask 002" >> /home/appuser/.bashrc
+    && echo "alias ll='ls -alF'" >> /etc/bash.bashrc \
+    && echo "umask 002" >> /etc/bash.bashrc \
 RUN echo "Container tools built on $(date --iso-8601=seconds)" > /image-build-date.txt \
 CMD [ "cat", "/image-build-date.txt" ]
