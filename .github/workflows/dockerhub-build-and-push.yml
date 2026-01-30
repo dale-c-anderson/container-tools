@@ -11,8 +11,16 @@ name: Docker Build And Push To Container Registry
 
 on:
   push:
+    branches:
+      - main
+      - master
+      - develop
     tags:
       - 'v*.*.*'
+  pull_request:
+    branches:
+      - main
+      - master
   release:
     types: [published]
 
@@ -93,3 +101,16 @@ jobs:
           subject-name: ghcr.io/${{ github.repository }}
           subject-digest: ${{ steps.push_ghcr.outputs.digest }}
           push-to-registry: true
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ghcr.io/${{ github.repository }}:${{ steps.meta_ghcr.outputs.version }}
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Upload Trivy results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-results.sarif'
