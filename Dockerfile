@@ -1,4 +1,4 @@
-FROM debian:trixie
+FROM debian:bookworm
 LABEL org.opencontainers.image.authors="Dale C. Anderson"
 LABEL org.opencontainers.image.url="https://github.com/dale-c-anderson/container-tools"
 ENV LANG=C.UTF-8
