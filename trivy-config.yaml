@@ -1,0 +1,3 @@
+secret:
+  exclude-paths:
+    - /opt/google-cloud-sdk/platform/gsutil/third_party/urllib3/dummyserver/certs/server.key
